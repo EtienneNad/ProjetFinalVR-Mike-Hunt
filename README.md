@@ -3,4 +3,4 @@
 travail final du cours d'environnement immersif H25   
 ## Auteurs:  
 **_Étienne Nadeau_**  
-**_Alexis Bovin_**
+**_Alexis Boivin_**
