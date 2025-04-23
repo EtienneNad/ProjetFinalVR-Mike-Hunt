@@ -187,6 +187,7 @@ MonoBehaviour:
   m_AutomaticRunning: 0
   m_LoaderManagerInstance: {fileID: 1819421338889867043}
   m_InitManagerOnStart: 1
+--- !u!114 &2527524452188535246
   m_Loaders:
   - {fileID: 11400000, guid: e9ee4b185e608054a96e7342849c3344, type: 2}
 --- !u!114 &6709975204612564464
