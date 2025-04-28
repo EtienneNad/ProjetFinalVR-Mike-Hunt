@@ -33,21 +33,48 @@ public class ControlleurFusil : MonoBehaviour
     /// </summary>
     private bool enAttaque;
 
+    [SerializeField] private HandGrabInteractable interactable;
+
+    private HandGrabInteractor mainQuiTient;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
+        interactable.WhenPointerEventRaised += OnGrabChanged;
     }
 
-    // Update is called once per frame
+    void OnDestroy()
+    {
+        interactable.WhenPointerEventRaised -= OnGrabChanged;
+    }
+
     void Update()
     {
+        if (mainQuiTient == null || enAttaque)
+            return;
 
-        //Si on tire la gachette, tirer le fusil
-        if (OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
+        // Déterminer la main via l'interactor
+        if (mainQuiTient.gameObject.name.ToLower().Contains("right") && OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
         {
             onTirer();
         }
+        else if (mainQuiTient.gameObject.name.ToLower().Contains("left") && OVRInput.Get(OVRInput.RawButton.LIndexTrigger))
+        {
+            onTirer();
+        }
+    }
 
+    private void OnGrabChanged(PointerEvent pointerEvent)
+    {
+        if (pointerEvent.Type == PointerEventType.Select)
+        {
+            mainQuiTient = pointerEvent.Data as HandGrabInteractor;
+        }
+        else if (pointerEvent.Type == PointerEventType.Unselect)
+        {
+            mainQuiTient = null;
+        }
     }
 
     /// <summary>
