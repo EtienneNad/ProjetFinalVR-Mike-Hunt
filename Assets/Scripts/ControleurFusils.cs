@@ -55,11 +55,12 @@ public class ControlleurFusil : MonoBehaviour
             return;
 
         // Déterminer la main via l'interactor
-        if (mainQuiTient.gameObject.name.ToLower().Contains("right") && OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
+        if (OVRInput.Get(OVRInput.RawButton.RHandTrigger) && OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
         {
             onTirer();
         }
-        else if (mainQuiTient.gameObject.name.ToLower().Contains("left") && OVRInput.Get(OVRInput.RawButton.LIndexTrigger))
+        //mainQuiTient.gameObject.name.ToLower().Contains("left")
+        else if (OVRInput.Get(OVRInput.RawButton.LHandTrigger) && OVRInput.Get(OVRInput.RawButton.LIndexTrigger))
         {
             onTirer();
         }
