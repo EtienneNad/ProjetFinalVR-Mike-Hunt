@@ -107,7 +107,7 @@
 //        yield return new WaitForSeconds(1f);
 //        enAttaque = false;
 //    }
-//}
+}
 using Oculus.Interaction;
 using Oculus.Interaction.HandGrab;
 using UnityEngine;
@@ -126,7 +126,7 @@ public class ControlleurFusil : MonoBehaviour
         if (grabInteractable == null || grabInteractable.SelectingInteractors.Count == 0 || enAttaque)
             return;
 
-        foreach (var interactor in grabInteractable.SelectingInteractors)
+        foreach (var interactor in grabInteractable.Interactors)
         {
             string interactorName = interactor.name.ToLower();
 
