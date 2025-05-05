@@ -33,7 +33,7 @@ public class ControlleurFusil : MonoBehaviour
     /// </summary>
     private bool enAttaque;
 
-    [SerializeField] private HandGrabInteractable interactable;
+    [SerializeField] private DistanceHandGrabInteractable interactable;
 
     private HandGrabInteractor mainQuiTient;
 
