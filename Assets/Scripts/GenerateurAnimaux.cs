@@ -3,21 +3,29 @@ using UnityEngine;
 
 public class GenerateurAnimaux : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField, Tooltip("Prefab des animaux")]
     private GameObject[] animaux;
 
-    [SerializeField]
+    [SerializeField, Tooltip("Emplacement ou peut apparaitre les animaux.")]
+    private Transform[] emplacementPredefini;
+
+
+    [SerializeField, Tooltip("Nombre d'animaux a instancier")]
     private int nombreAnimaux = 10;
 
     private bool coroutineEnCours = false;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created  
+    /// <summary>
+    /// Méthode appelée au départ
+    /// </summary>
     void Start()
     {
         GenererAnimaux();
     }
 
-    // Update is called once per frame  
+   /// <summary>
+   /// Méthode appelée une fois par frame
+   /// </summary>   
     void Update()
     {
         int nombreAnimauxActuels = transform.childCount;
@@ -27,6 +35,9 @@ public class GenerateurAnimaux : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Méthode pour générer un nombre fixe d'animaux
+    /// </summary>
     private void GenererAnimaux()
     {
         for (int i = 0; i < nombreAnimaux; i++)
@@ -35,13 +46,23 @@ public class GenerateurAnimaux : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Méthode pour générer un animal à une position aléatoire
+    /// </summary>
     private void GenereAnimal()
     {
-        GameObject animal = Instantiate(animaux[Random.Range(0, animaux.Length)],
-            new Vector3(Random.Range(-150f, 150f), 0.0f, Random.Range(-150f, 150f)), Quaternion.identity);
-        animal.transform.parent = transform;
+        
+            GameObject animal = Instantiate(animaux[Random.Range(0, animaux.Length)],
+            emplacementPredefini[Random.Range(0, emplacementPredefini.Length)].position, Quaternion.identity);
+            animal.transform.parent = transform;
+        
+       
     }
 
+    /// <summary>
+    /// Coroutine pour générer un animal après un délai
+    /// </summary>
+    /// <returns>délais de 2 seconde</returns>
     private IEnumerator GenereAnimalAvecDelai()
     {
         coroutineEnCours = true; // Indique que la coroutine est en cours  
