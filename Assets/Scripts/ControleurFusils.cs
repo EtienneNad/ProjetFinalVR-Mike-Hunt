@@ -155,6 +155,8 @@ public class ControlleurFusil : MonoBehaviour
     public void onTirer()
     {
         enAttaque = true;
+        AudioSource sourceaudio = GetComponent<AudioSource>();
+        sourceaudio.Play();
         StartCoroutine(EffetTir());
     }
 
