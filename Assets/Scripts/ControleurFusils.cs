@@ -148,16 +148,22 @@ public class ControlleurFusil : MonoBehaviour
     public void onTirer()
     {
         enAttaque = true;
-        StartCoroutine(EffetTir());
-    }
-
-    private IEnumerator EffetTir()
-    {
         GameObject balleExistante = Instantiate(prefabBalle, canon.position, canon.rotation);
         balleExistante.GetComponent<Rigidbody>().AddForce(canon.forward * vitesseBalle, ForceMode.Impulse);
 
         Destroy(balleExistante, 10f);
-        yield return new WaitForSeconds(1f);
+        //yield return new WaitForSeconds(1f);
         enAttaque = false;
+        //StartCoroutine(EffetTir());
     }
+
+    //private IEnumerator EffetTir()
+    //{
+    //    GameObject balleExistante = Instantiate(prefabBalle, canon.position, canon.rotation);
+    //    balleExistante.GetComponent<Rigidbody>().AddForce(canon.forward * vitesseBalle, ForceMode.Impulse);
+
+    //    Destroy(balleExistante, 10f);
+    //    yield return new WaitForSeconds(1f);
+    //    enAttaque = false;
+    //}
 }
