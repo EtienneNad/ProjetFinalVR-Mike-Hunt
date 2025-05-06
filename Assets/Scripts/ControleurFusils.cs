@@ -31,23 +31,30 @@ public class ControlleurFusil : MonoBehaviour
     /// <summary>
     /// Booléen qui représente si le joueur est entrain de tirer. Sers à mettre un délai entre les balles.
     /// </summary>
-    private bool enAttaque;
+    private bool enAttaque = false;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
     void Update()
     {
 
-        //Si on tire la gachette, tirer le fusil
+
+        // Déterminer la main via l'interactor
         if (OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
         {
-            onTirer();
+            if (!enAttaque) // Vérifier si on n'est pas déjà en train de tirer  
+            {
+                onTirer(); // Tirer seulement si on n'est pas déjà en train de tirer  
+            }
         }
-
+        //mainQuiTient.gameObject.name.ToLower().Contains("left")
+        else if (OVRInput.Get(OVRInput.RawButton.LIndexTrigger))
+        {
+            if (!enAttaque) // Vérifier si on n'est pas déjà en train de tirer  
+            {
+                onTirer(); // Tirer seulement si on n'est pas déjà en train de tirer  
+            }
+        }
     }
 
     /// <summary>
@@ -55,16 +62,19 @@ public class ControlleurFusil : MonoBehaviour
     /// </summary>
     public void onTirer()
     {
-        enAttaque = true;
+        //enAttaque = true;
+        AudioSource sourceaudio = GetComponent<AudioSource>();
+        sourceaudio.Play();
         StartCoroutine(EffetTir());
     }
-    
+
     /// <summary>
     /// Coroutine pour tirer une balle
     /// </summary>
     /// <returns>Un délai de une seconde entre chaque tir.</returns>
     private IEnumerator EffetTir()
     {
+        enAttaque = true; 
         //Créer la balle
         GameObject balleExistante = Instantiate(prefabBalle);
         balleExistante.transform.position = canon.position;
