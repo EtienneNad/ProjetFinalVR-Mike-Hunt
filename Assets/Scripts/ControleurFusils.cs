@@ -40,7 +40,7 @@ public class ControlleurFusil : MonoBehaviour
 
 
         // Déterminer la main via l'interactor
-        if (OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
+        if (OVRInput.Get(OVRInput.RawButton.RHandTrigger) && OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
         {
             if (!enAttaque) // Vérifier si on n'est pas déjà en train de tirer  
             {
@@ -48,7 +48,7 @@ public class ControlleurFusil : MonoBehaviour
             }
         }
         //mainQuiTient.gameObject.name.ToLower().Contains("left")
-        else if (OVRInput.Get(OVRInput.RawButton.LIndexTrigger))
+        else if (OVRInput.Get(OVRInput.RawButton.LHandTrigger) && OVRInput.Get(OVRInput.RawButton.LIndexTrigger))
         {
             if (!enAttaque) // Vérifier si on n'est pas déjà en train de tirer  
             {
