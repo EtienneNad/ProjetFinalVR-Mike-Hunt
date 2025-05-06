@@ -114,7 +114,6 @@ Material:
       second: 0.02
     - first:
         name: _SmoothnessTextureChannel
-
       second: 1
     - first:
         name: _SpecularHighlights
