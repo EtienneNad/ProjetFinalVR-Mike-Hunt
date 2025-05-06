@@ -67,9 +67,15 @@ public class ControleurAnimaux : MonoBehaviour
     /// <param name="collision">l'animal perd une vie</param>
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.gameObject.CompareTag("Balle"))
+        if (collision != null)
         {
-            vie -= 1f;
+            if (collision.gameObject.tag == "Balle")
+            {
+                Debug.Log("L'animal a été touché par une balle");
+                vie -= 1f; // Réduire la vie de l'animal de 1
+                Destroy(collision.gameObject);
+            }
+
         }
     }
     /// <summary>
