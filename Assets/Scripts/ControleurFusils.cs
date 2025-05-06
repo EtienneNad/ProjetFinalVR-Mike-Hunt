@@ -31,7 +31,7 @@ public class ControlleurFusil : MonoBehaviour
     /// <summary>
     /// Booléen qui représente si le joueur est entrain de tirer. Sers à mettre un délai entre les balles.
     /// </summary>
-    private bool enAttaque;
+    private bool enAttaque = false;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -42,12 +42,18 @@ public class ControlleurFusil : MonoBehaviour
         // Déterminer la main via l'interactor
         if (OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
         {
-            onTirer();
+            if (!enAttaque) // Vérifier si on n'est pas déjà en train de tirer  
+            {
+                onTirer(); // Tirer seulement si on n'est pas déjà en train de tirer  
+            }
         }
         //mainQuiTient.gameObject.name.ToLower().Contains("left")
         else if (OVRInput.Get(OVRInput.RawButton.LIndexTrigger))
         {
-            onTirer();
+            if (!enAttaque) // Vérifier si on n'est pas déjà en train de tirer  
+            {
+                onTirer(); // Tirer seulement si on n'est pas déjà en train de tirer  
+            }
         }
     }
 
@@ -56,7 +62,7 @@ public class ControlleurFusil : MonoBehaviour
     /// </summary>
     public void onTirer()
     {
-        enAttaque = true;
+        //enAttaque = true;
         AudioSource sourceaudio = GetComponent<AudioSource>();
         sourceaudio.Play();
         StartCoroutine(EffetTir());
@@ -68,6 +74,7 @@ public class ControlleurFusil : MonoBehaviour
     /// <returns>Un délai de une seconde entre chaque tir.</returns>
     private IEnumerator EffetTir()
     {
+        enAttaque = true; 
         //Créer la balle
         GameObject balleExistante = Instantiate(prefabBalle);
         balleExistante.transform.position = canon.position;
