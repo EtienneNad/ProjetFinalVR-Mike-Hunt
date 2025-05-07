@@ -57,6 +57,7 @@ public class ControleurAnimaux : MonoBehaviour
         // Vérifier si la vie de l'animal est inférieure ou égale à 0
         if(vie <= 0)
         {
+            DonneeJoueur.Instance.EnleverAnimaux();
             Destroy(gameObject); // Détruire l'objet si la vie est inférieure ou égale à 0  
         }
     }
@@ -73,6 +74,7 @@ public class ControleurAnimaux : MonoBehaviour
             {
                 Debug.Log("L'animal a été touché par une balle");
                 vie -= 1f; // Réduire la vie de l'animal de 1
+
                 Destroy(collision.gameObject);
             }
 
