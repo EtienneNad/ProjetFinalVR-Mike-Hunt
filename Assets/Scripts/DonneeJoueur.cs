@@ -1,21 +1,29 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 
 public class DonneeJoueur : MonoBehaviour
 {
     public static DonneeJoueur Instance { get; private set; }
 
-    [SerializeField, Tooltip("Nobre d'animaux a tuer")]
+    [SerializeField, Tooltip("Nombre d'animaux a tuer")]
     private int nombreAnimauxRestant;
 
-    [SerializeField, Tooltip("Canvas du menu pause")]
-    private CanvasGroup menuPause;
+    [SerializeField, Tooltip("Canvas du menu")]
+    private GameObject menu;
 
-    [SerializeField, Tooltip("canvas du menu fin")]
-    private CanvasGroup menuFin; 
+    [SerializeField, Tooltip("Bouton pour recommencer le jeu")]
+    private Button boutonRecommencer;
+
+    [SerializeField, Tooltip("Bouton pour quitter le jeu")]
+    private Button boutonQuitter;
 
     [SerializeField, Tooltip("Valeur actuel du nombre d'animaux restant")]
     private UnityEvent<int[]> valeurNombreAnimauxRestant;
+
+    bool menuOuvert = false;
 
 
     /// <summary>
@@ -40,20 +48,27 @@ public class DonneeJoueur : MonoBehaviour
     {
         valeurNombreAnimauxRestant.Invoke(ModificationNombreAnimauxRestant());
 
+        // Ajout des listeners aux boutons
+        if (boutonRecommencer != null)
+            boutonRecommencer.onClick.AddListener(RecommencerJeu);
+
+        if (boutonQuitter != null)
+            boutonQuitter.onClick.AddListener(QuitterJeu);
     }
     /// <summary>
     /// Méthode Update pour vérifier les entrées de l'utilisateur et mettre à jour l'interface utilisateur.
     /// </summary>
     private void Update()
     {
-        if (OVRInput.Get(OVRInput.RawButton.Start))
+        if (OVRInput.Get(OVRInput.RawButton.Start) && menuOuvert || nombreAnimauxRestant <= 0)
         {
-            AfficherMenuPause();
+            AfficherMenu();
         }
-        if (nombreAnimauxRestant <= 0)
+        if(OVRInput.Get(OVRInput.RawButton.Start) && !menuOuvert)
         {
-            AfficherMenuFin();
+            FermerMenu();
         }
+        
         valeurNombreAnimauxRestant.Invoke(ModificationNombreAnimauxRestant());
 
     }
@@ -61,31 +76,36 @@ public class DonneeJoueur : MonoBehaviour
     /// <summary>
     /// Méthode pour afficher le menu de pause.
     /// </summary>
-    private void AfficherMenuPause()
+    private void AfficherMenu()
     {
-        if (menuPause != null)
+        if (menu != null)
         {
-            menuPause.alpha = 1;
-            menuPause.interactable = true;
-            menuPause.blocksRaycasts = true;
+            menu.SetActive(true);
             Time.timeScale = 0;
-
-        }
-    }
-    /// <summary>
-    /// Méthode pour afficher le menu de fin.
-    /// </summary>
-    private void AfficherMenuFin()
-    {
-        if (menuPause != null)
-        {
-            menuFin.alpha = 1;
-            menuFin.interactable = true;
-            menuFin.blocksRaycasts = true;
-            Time.timeScale = 0;
+            menuOuvert = true;
         }
     }
 
+    public void FermerMenu()
+    {
+        if (menu != null)
+        {
+            menu.SetActive(false);
+            Time.timeScale = 1f;
+            menuOuvert = false;
+        }
+    }
+
+    public void RecommencerJeu()
+    {
+        Time.timeScale = 1f; // Réactive le temps avant de recharger
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void QuitterJeu()
+    {
+        Application.Quit();
+    }
     /// <summary>
     ///  Méthode pour retirer un animal au nombre d'animaux restant.
     /// </summary>
