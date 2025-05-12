@@ -32,7 +32,7 @@ public class ControleurAnimaux : MonoBehaviour
     /// <returns>La nouvelle destination</returns>
     private Vector3 DeplacementAleatoire()
     {
-        return new Vector3(Random.Range(-150f, 150f), 0.0f, Random.Range(-150f, 150f));
+        return new Vector3(Random.Range(-150f, 150f), 10.0f, Random.Range(-150f, 150f));
     }
 
     /// <summary>

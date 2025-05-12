@@ -144,8 +144,8 @@ PlayerSettings:
   preloadedAssets:
   - {fileID: 11400000, guid: 9cf24030b6e330044911ba9965a50aed, type: 2}
   - {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  - {fileID: -7960589218281519294, guid: 5144ab31e2332d244812782abe57d617, type: 2}
-  - {fileID: -2355915220943759206, guid: f41229af49feaef44a535e1740603b84, type: 2}
+  - {fileID: -6743065582875237351, guid: 5144ab31e2332d244812782abe57d617, type: 2}
+  - {fileID: -8412508620518734873, guid: f41229af49feaef44a535e1740603b84, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -847,8 +847,8 @@ PlayerSettings:
   editorAssembliesCompatibilityLevel: 1
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: Mike Hunt
-  metroPackageVersion: 
+  metroPackageName: MikeHunt
+  metroPackageVersion: 1.0.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
@@ -856,7 +856,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: Mike Hunt
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: Mike Hunt
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0
